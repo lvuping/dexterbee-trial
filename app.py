@@ -18,10 +18,12 @@ uploaded_file = st.sidebar.file_uploader("Choose a PDF file")
 if uploaded_file:
     st.session_state.uploaded = True
 
-st.title("📖 Chat with Your PDF: Boost Productivity and Find Info Fast!")
+st.title("DexterBee's AutoMate (AI Chatbot) Demo Page")
 st.write("---")
 message_placeholder = st.empty()
-message_placeholder.write("This is a test app by Dexter Bee.")
+message_placeholder.write(
+    "This is a demo version of the AutoMate app. The full version includes more features and better performance, such as an admin page, web search, vector DB management, and more."
+)
 
 
 def pdf_to_document(uploaded_file):
@@ -63,7 +65,6 @@ if st.session_state.get("uploaded", False):
         st.chat_message(msg["role"]).write(msg["content"])
 
     if prompt := st.chat_input():
-        # client = ChatOpenAI(api_key=api_key, model_name="gpt-4o", temperature=0)
         client = ChatOpenAI(api_key=api_key, model_name="gpt-4o", temperature=0)
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.chat_message("user").write(prompt)
