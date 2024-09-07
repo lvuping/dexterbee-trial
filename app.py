@@ -10,34 +10,15 @@ import streamlit as st
 import tempfile
 import os
 
-# 기존 코드 위에 추가
+# Streamlit 설정
 st.set_page_config(
     page_title="DexterBee's AutoMate", page_icon="🐝", initial_sidebar_state="expanded"
 )
 
-# CORS 및 base URL 설정
-st.markdown(
-    f"""
-<script>
-    const baseUrl = "{st.get_option('server.baseUrlPath')}";
-    if (baseUrl) {{
-        const links = document.getElementsByTagName('link');
-        const scripts = document.getElementsByTagName('script');
-        for (let i = 0; i < links.length; i++) {{
-            if (links[i].href && !links[i].href.startsWith('http')) {{
-                links[i].href = baseUrl + links[i].href;
-            }}
-        }}
-        for (let i = 0; i < scripts.length; i++) {{
-            if (scripts[i].src && !scripts[i].src.startsWith('http')) {{
-                scripts[i].src = baseUrl + scripts[i].src;
-            }}
-        }}
-    }}
-</script>
-""",
-    unsafe_allow_html=True,
-)
+# 베이스 URL 설정
+base_url = st.get_option("server.baseUrlPath")
+if base_url:
+    st.markdown(f'<base href="{base_url}/">', unsafe_allow_html=True)
 
 
 load_dotenv(override=True)
