@@ -10,18 +10,31 @@ import streamlit as st
 import tempfile
 import os
 
+# 기존 코드 위에 추가
 st.set_page_config(
     page_title="DexterBee's AutoMate", page_icon="🐝", initial_sidebar_state="expanded"
 )
 
-# CORS 설정
+# CORS 및 base URL 설정
 st.markdown(
-    """
-<style>
-    [data-testid="stSidebar"] {
-        background-color: #f1f3f6;
-    }
-</style>
+    f"""
+<script>
+    const baseUrl = "{st.get_option('server.baseUrlPath')}";
+    if (baseUrl) {{
+        const links = document.getElementsByTagName('link');
+        const scripts = document.getElementsByTagName('script');
+        for (let i = 0; i < links.length; i++) {{
+            if (links[i].href && !links[i].href.startsWith('http')) {{
+                links[i].href = baseUrl + links[i].href;
+            }}
+        }}
+        for (let i = 0; i < scripts.length; i++) {{
+            if (scripts[i].src && !scripts[i].src.startsWith('http')) {{
+                scripts[i].src = baseUrl + scripts[i].src;
+            }}
+        }}
+    }}
+</script>
 """,
     unsafe_allow_html=True,
 )
