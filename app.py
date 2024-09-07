@@ -10,6 +10,23 @@ import streamlit as st
 import tempfile
 import os
 
+st.set_page_config(
+    page_title="DexterBee's AutoMate", page_icon="🐝", initial_sidebar_state="expanded"
+)
+
+# CORS 설정
+st.markdown(
+    """
+<style>
+    [data-testid="stSidebar"] {
+        background-color: #f1f3f6;
+    }
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+
 load_dotenv(override=True)
 api_key = os.getenv("OPENAI_API_KEY")
 
